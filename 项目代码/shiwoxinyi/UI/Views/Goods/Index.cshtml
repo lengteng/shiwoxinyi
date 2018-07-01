@@ -1,0 +1,60 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Models.Goods>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HouTai.cshtml";
+}
+
+<div class="container">
+    <div class="title_top">
+        <p style="color:darkgrey">
+            @Html.ActionLink("添加商品", "GoodsCreate")
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width: 10%">标题</th>
+                <th style="width: 15%">封面</th>
+                <th style="width: 30%">简介</th>
+                @*<th style="width: 35%">详情</th>*@
+                <th style="width: 10%">操作</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoodsName)
+                </td>
+                <td>
+                    <img src="@item.GoodsImage" style="width:60px;height:80px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoodsJianjie)
+                </td>
+
+                <td>
+                    <p>
+                        @Html.ActionLink("更新", "GoodsEdit", new { id = item.Goods_id }) |
+                        @Html.ActionLink("删除", "Delete", new { id = item.Goods_id })
+                    </p>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <div class="row page-list">
+        <div class="col-xs-4 col-sm-6 col-md-6 pagejiye"></div>
+
+        <div class="col-xs-6 col-sm-4 col-md-4 pagejiye">
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Goods", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 pageje">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>
+    </div>
+</div>

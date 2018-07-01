@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="shiwoxinyigaiModelStoreContainer" CdmEntityContainer="shiwoxinyigaiEntities">
+    <EntitySetMapping Name="Goods">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.Goods">
+        <MappingFragment StoreEntitySet="Goods">
+          <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+          <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+          <ScalarProperty Name="GoodsImage" ColumnName="GoodsImage" />
+          <ScalarProperty Name="GoodsJianjie" ColumnName="GoodsJianjie" />
+          <ScalarProperty Name="GoodsDetails" ColumnName="GoodsDetails" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="GoodsK_id" ColumnName="GoodsK_id" />
+          <ScalarProperty Name="flag" ColumnName="flag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsK">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.GoodsK">
+        <MappingFragment StoreEntitySet="GoodsK">
+          <ScalarProperty Name="GoodsK_id" ColumnName="GoodsK_id" />
+          <ScalarProperty Name="GoodsKName" ColumnName="GoodsKName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manager">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.Manager">
+        <MappingFragment StoreEntitySet="Manager">
+          <ScalarProperty Name="Manager_id" ColumnName="Manager_id" />
+          <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+          <ScalarProperty Name="ManagerPass" ColumnName="ManagerPass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Orders_id" ColumnName="Orders_id" />
+          <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+          <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+          <ScalarProperty Name="Sum" ColumnName="Sum" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="note" ColumnName="note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdersDetails">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.OrdersDetails">
+        <MappingFragment StoreEntitySet="OrdersDetails">
+          <ScalarProperty Name="Orders_id" ColumnName="Orders_id" />
+          <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="note" ColumnName="note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShopCar">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.ShopCar">
+        <MappingFragment StoreEntitySet="ShopCar">
+          <ScalarProperty Name="ShopCar_id" ColumnName="ShopCar_id" />
+          <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="flag" ColumnName="flag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAddress">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.UserAddress">
+        <MappingFragment StoreEntitySet="UserAddress">
+          <ScalarProperty Name="UserAddress_id" ColumnName="UserAddress_id" />
+          <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="UserMail" ColumnName="UserMail" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+          <ScalarProperty Name="SafeQues" ColumnName="SafeQues" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="UserSign" ColumnName="UserSign" />
+          <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+          <ScalarProperty Name="Pifu" ColumnName="Pifu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_OrderDetails">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.View_OrderDetails">
+        <MappingFragment StoreEntitySet="View_OrderDetails">
+          <ScalarProperty Name="Orders_id" ColumnName="Orders_id" />
+          <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+          <ScalarProperty Name="Sum" ColumnName="Sum" />
+          <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+          <ScalarProperty Name="GoodsImage" ColumnName="GoodsImage" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_ShopCar">
+      <EntityTypeMapping TypeName="shiwoxinyigaiModel.View_ShopCar">
+        <MappingFragment StoreEntitySet="View_ShopCar">
+          <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+          <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+          <ScalarProperty Name="GoodsImage" ColumnName="GoodsImage" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ShopCar_id" ColumnName="ShopCar_id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="flag" ColumnName="flag" />
+          <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ShopCar_Orders" FunctionName="shiwoxinyigaiModel.Store.ShopCar_Orders" />
+  </EntityContainerMapping>
+</Mapping>

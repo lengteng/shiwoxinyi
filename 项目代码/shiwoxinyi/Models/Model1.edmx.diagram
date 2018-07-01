@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="833021cb38b94a6cb3a159dca093085d" Name="Diagram1">
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.Goods" Width="1.5" PointX="3.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.GoodsK" Width="1.5" PointX="1.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.Manager" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.Orders" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.OrdersDetails" Width="1.5" PointX="6" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.ShopCar" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.UserAddress" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.UserInfo" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.View_OrderDetails" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="shiwoxinyigaiModel.View_ShopCar" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="shiwoxinyigaiModel.FK_Goods_GoodsK" ManuallyRouted="false" />
+        <AssociationConnector Association="shiwoxinyigaiModel.FK_OrdersDetails_Goods" ManuallyRouted="false" />
+        <AssociationConnector Association="shiwoxinyigaiModel.FK_ShopCar_Goods" ManuallyRouted="false" />
+        <AssociationConnector Association="shiwoxinyigaiModel.FK_GoodsK_GoodsK" ManuallyRouted="false" />
+        <AssociationConnector Association="shiwoxinyigaiModel.FK_Orders_UserInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="shiwoxinyigaiModel.FK_ShopCar_UserInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="shiwoxinyigaiModel.FK_UserAddress_UserInfo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

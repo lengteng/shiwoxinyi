@@ -1,0 +1,778 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="shiwoxinyigaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="Goods_id" />
+          </Key>
+          <Property Name="Goods_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoodsName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GoodsImage" Type="nvarchar(max)" />
+          <Property Name="GoodsJianjie" Type="nvarchar(max)" />
+          <Property Name="GoodsDetails" Type="nvarchar(max)" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Count" Type="int" />
+          <Property Name="GoodsK_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="flag" Type="int" />
+        </EntityType>
+        <EntityType Name="GoodsK">
+          <Key>
+            <PropertyRef Name="GoodsK_id" />
+          </Key>
+          <Property Name="GoodsK_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GoodsKName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="Manager_id" />
+          </Key>
+          <Property Name="Manager_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ManagerName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ManagerPass" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Orders_id" />
+          </Key>
+          <Property Name="Orders_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Users_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OrdersDetails">
+          <Key>
+            <PropertyRef Name="Orders_id" />
+          </Key>
+          <Property Name="Orders_id" Type="int" Nullable="false" />
+          <Property Name="Goods_id" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ShopCar">
+          <Key>
+            <PropertyRef Name="ShopCar_id" />
+          </Key>
+          <Property Name="ShopCar_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Goods_id" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Users_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="flag" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="UserAddress_id" />
+          </Key>
+          <Property Name="UserAddress_id" Type="int" Nullable="false" />
+          <Property Name="Users_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Users_id" />
+          </Key>
+          <Property Name="Users_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserPass" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="11" />
+          <Property Name="UserMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sex" Type="nchar" MaxLength="2" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="SafeQues" Type="nvarchar" MaxLength="50" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="UserSign" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserImage" Type="text" />
+          <Property Name="Pifu" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“shiwoxinyigai.dbo.View_OrderDetails”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="View_OrderDetails">
+          <Key>
+            <PropertyRef Name="Orders_id" />
+            <PropertyRef Name="Goods_id" />
+            <PropertyRef Name="OrderTime" />
+            <PropertyRef Name="GoodsName" />
+            <PropertyRef Name="Users_id" />
+          </Key>
+          <Property Name="Orders_id" Type="int" Nullable="false" />
+          <Property Name="Goods_id" Type="int" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="note" Type="nvarchar(max)" />
+          <Property Name="GoodsName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GoodsImage" Type="nvarchar(max)" />
+          <Property Name="Count" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Users_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“shiwoxinyigai.dbo.View_ShopCar”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="View_ShopCar">
+          <Key>
+            <PropertyRef Name="Goods_id" />
+            <PropertyRef Name="GoodsName" />
+            <PropertyRef Name="ShopCar_id" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="note" />
+            <PropertyRef Name="flag" />
+            <PropertyRef Name="Users_id" />
+          </Key>
+          <Property Name="Goods_id" Type="int" Nullable="false" />
+          <Property Name="GoodsName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GoodsImage" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ShopCar_id" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="flag" Type="int" Nullable="false" />
+          <Property Name="Users_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="FinalPrice" Type="decimal" Precision="29" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Goods_GoodsK">
+          <End Role="GoodsK" Type="Self.GoodsK" Multiplicity="0..1" />
+          <End Role="Goods" Type="Self.Goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsK">
+              <PropertyRef Name="GoodsK_id" />
+            </Principal>
+            <Dependent Role="Goods">
+              <PropertyRef Name="GoodsK_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsK_GoodsK">
+          <End Role="GoodsK" Type="Self.GoodsK" Multiplicity="1" />
+          <End Role="GoodsK1" Type="Self.GoodsK" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsK">
+              <PropertyRef Name="GoodsK_id" />
+            </Principal>
+            <Dependent Role="GoodsK1">
+              <PropertyRef Name="GoodsK_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Users_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersDetails_Goods">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1" />
+          <End Role="OrdersDetails" Type="Self.OrdersDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Goods_id" />
+            </Principal>
+            <Dependent Role="OrdersDetails">
+              <PropertyRef Name="Goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopCar_Goods">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1" />
+          <End Role="ShopCar" Type="Self.ShopCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Goods_id" />
+            </Principal>
+            <Dependent Role="ShopCar">
+              <PropertyRef Name="Goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopCar_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="ShopCar" Type="Self.ShopCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Users_id" />
+            </Principal>
+            <Dependent Role="ShopCar">
+              <PropertyRef Name="Users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAddress_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Users_id" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="Users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ShopCar_Orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Users_id" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="note" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="shiwoxinyigaiModelStoreContainer">
+          <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodsK" EntityType="Self.GoodsK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersDetails" EntityType="Self.OrdersDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopCar" EntityType="Self.ShopCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAddress" EntityType="Self.UserAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_OrderDetails" EntityType="Self.View_OrderDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_OrderDetails].[Orders_id] AS [Orders_id], 
+    [View_OrderDetails].[Goods_id] AS [Goods_id], 
+    [View_OrderDetails].[Sum] AS [Sum], 
+    [View_OrderDetails].[OrderTime] AS [OrderTime], 
+    [View_OrderDetails].[UserName] AS [UserName], 
+    [View_OrderDetails].[UserPhone] AS [UserPhone], 
+    [View_OrderDetails].[Address] AS [Address], 
+    [View_OrderDetails].[note] AS [note], 
+    [View_OrderDetails].[GoodsName] AS [GoodsName], 
+    [View_OrderDetails].[GoodsImage] AS [GoodsImage], 
+    [View_OrderDetails].[Count] AS [Count], 
+    [View_OrderDetails].[Price] AS [Price], 
+    [View_OrderDetails].[Users_id] AS [Users_id]
+    FROM [dbo].[View_OrderDetails] AS [View_OrderDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_ShopCar" EntityType="Self.View_ShopCar" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ShopCar].[Goods_id] AS [Goods_id], 
+    [View_ShopCar].[GoodsName] AS [GoodsName], 
+    [View_ShopCar].[GoodsImage] AS [GoodsImage], 
+    [View_ShopCar].[Price] AS [Price], 
+    [View_ShopCar].[ShopCar_id] AS [ShopCar_id], 
+    [View_ShopCar].[Count] AS [Count], 
+    [View_ShopCar].[note] AS [note], 
+    [View_ShopCar].[flag] AS [flag], 
+    [View_ShopCar].[Users_id] AS [Users_id], 
+    [View_ShopCar].[UserName] AS [UserName], 
+    [View_ShopCar].[UserPhone] AS [UserPhone], 
+    [View_ShopCar].[Address] AS [Address], 
+    [View_ShopCar].[FinalPrice] AS [FinalPrice]
+    FROM [dbo].[View_ShopCar] AS [View_ShopCar]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Goods_GoodsK" Association="Self.FK_Goods_GoodsK">
+            <End Role="GoodsK" EntitySet="GoodsK" />
+            <End Role="Goods" EntitySet="Goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsK_GoodsK" Association="Self.FK_GoodsK_GoodsK">
+            <End Role="GoodsK" EntitySet="GoodsK" />
+            <End Role="GoodsK1" EntitySet="GoodsK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_UserInfo" Association="Self.FK_Orders_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersDetails_Goods" Association="Self.FK_OrdersDetails_Goods">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopCar_Goods" Association="Self.FK_ShopCar_Goods">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="ShopCar" EntitySet="ShopCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopCar_UserInfo" Association="Self.FK_ShopCar_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ShopCar" EntitySet="ShopCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAddress_UserInfo" Association="Self.FK_UserAddress_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shiwoxinyigaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="Goods_id" />
+          </Key>
+          <Property Name="Goods_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GoodsImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GoodsJianjie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GoodsDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="GoodsK_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="flag" Type="Int32" />
+          <NavigationProperty Name="GoodsK" Relationship="Self.FK_Goods_GoodsK" FromRole="Goods" ToRole="GoodsK" />
+          <NavigationProperty Name="OrdersDetails" Relationship="Self.FK_OrdersDetails_Goods" FromRole="Goods" ToRole="OrdersDetails" />
+          <NavigationProperty Name="ShopCar" Relationship="Self.FK_ShopCar_Goods" FromRole="Goods" ToRole="ShopCar" />
+        </EntityType>
+        <EntityType Name="GoodsK">
+          <Key>
+            <PropertyRef Name="GoodsK_id" />
+          </Key>
+          <Property Name="GoodsK_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GoodsKName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Goods" Relationship="Self.FK_Goods_GoodsK" FromRole="GoodsK" ToRole="Goods" />
+          <NavigationProperty Name="GoodsK1" Relationship="Self.FK_GoodsK_GoodsK" FromRole="GoodsK" ToRole="GoodsK1" />
+          <NavigationProperty Name="GoodsK2" Relationship="Self.FK_GoodsK_GoodsK" FromRole="GoodsK1" ToRole="GoodsK" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="Manager_id" />
+          </Key>
+          <Property Name="Manager_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ManagerName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ManagerPass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Orders_id" />
+          </Key>
+          <Property Name="Orders_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Users_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sum" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserPhone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_Orders_UserInfo" FromRole="Orders" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="OrdersDetails">
+          <Key>
+            <PropertyRef Name="Orders_id" />
+          </Key>
+          <Property Name="Orders_id" Type="Int32" Nullable="false" />
+          <Property Name="Goods_id" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserPhone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Goods" Relationship="Self.FK_OrdersDetails_Goods" FromRole="OrdersDetails" ToRole="Goods" />
+        </EntityType>
+        <EntityType Name="ShopCar">
+          <Key>
+            <PropertyRef Name="ShopCar_id" />
+          </Key>
+          <Property Name="ShopCar_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Goods_id" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Users_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="flag" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Goods" Relationship="Self.FK_ShopCar_Goods" FromRole="ShopCar" ToRole="Goods" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_ShopCar_UserInfo" FromRole="ShopCar" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserAddress">
+          <Key>
+            <PropertyRef Name="UserAddress_id" />
+          </Key>
+          <Property Name="UserAddress_id" Type="Int32" Nullable="false" />
+          <Property Name="Users_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserAddress_UserInfo" FromRole="UserAddress" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Users_id" />
+          </Key>
+          <Property Name="Users_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserPass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="UserMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="SafeQues" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserSign" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Pifu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_UserInfo" FromRole="UserInfo" ToRole="Orders" />
+          <NavigationProperty Name="ShopCar" Relationship="Self.FK_ShopCar_UserInfo" FromRole="UserInfo" ToRole="ShopCar" />
+          <NavigationProperty Name="UserAddress" Relationship="Self.FK_UserAddress_UserInfo" FromRole="UserInfo" ToRole="UserAddress" />
+        </EntityType>
+        <EntityType Name="View_OrderDetails">
+          <Key>
+            <PropertyRef Name="Orders_id" />
+            <PropertyRef Name="Goods_id" />
+            <PropertyRef Name="OrderTime" />
+            <PropertyRef Name="GoodsName" />
+            <PropertyRef Name="Users_id" />
+          </Key>
+          <Property Name="Orders_id" Type="Int32" Nullable="false" />
+          <Property Name="Goods_id" Type="Int32" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserPhone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GoodsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GoodsImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Users_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="View_ShopCar">
+          <Key>
+            <PropertyRef Name="Goods_id" />
+            <PropertyRef Name="GoodsName" />
+            <PropertyRef Name="ShopCar_id" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="note" />
+            <PropertyRef Name="flag" />
+            <PropertyRef Name="Users_id" />
+          </Key>
+          <Property Name="Goods_id" Type="Int32" Nullable="false" />
+          <Property Name="GoodsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GoodsImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ShopCar_id" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="flag" Type="Int32" Nullable="false" />
+          <Property Name="Users_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FinalPrice" Type="Decimal" Precision="29" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Goods_GoodsK">
+          <End Role="GoodsK" Type="Self.GoodsK" Multiplicity="0..1" />
+          <End Role="Goods" Type="Self.Goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsK">
+              <PropertyRef Name="GoodsK_id" />
+            </Principal>
+            <Dependent Role="Goods">
+              <PropertyRef Name="GoodsK_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdersDetails_Goods">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1" />
+          <End Role="OrdersDetails" Type="Self.OrdersDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Goods_id" />
+            </Principal>
+            <Dependent Role="OrdersDetails">
+              <PropertyRef Name="Goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopCar_Goods">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1" />
+          <End Role="ShopCar" Type="Self.ShopCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Goods_id" />
+            </Principal>
+            <Dependent Role="ShopCar">
+              <PropertyRef Name="Goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsK_GoodsK">
+          <End Role="GoodsK" Type="Self.GoodsK" Multiplicity="1" />
+          <End Role="GoodsK1" Type="Self.GoodsK" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsK">
+              <PropertyRef Name="GoodsK_id" />
+            </Principal>
+            <Dependent Role="GoodsK1">
+              <PropertyRef Name="GoodsK_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Users_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopCar_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="ShopCar" Type="Self.ShopCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Users_id" />
+            </Principal>
+            <Dependent Role="ShopCar">
+              <PropertyRef Name="Users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAddress_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+          <End Role="UserAddress" Type="Self.UserAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Users_id" />
+            </Principal>
+            <Dependent Role="UserAddress">
+              <PropertyRef Name="Users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="shiwoxinyigaiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Goods" EntityType="Self.Goods" />
+          <EntitySet Name="GoodsK" EntityType="Self.GoodsK" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="OrdersDetails" EntityType="Self.OrdersDetails" />
+          <EntitySet Name="ShopCar" EntityType="Self.ShopCar" />
+          <EntitySet Name="UserAddress" EntityType="Self.UserAddress" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <EntitySet Name="View_OrderDetails" EntityType="Self.View_OrderDetails" />
+          <EntitySet Name="View_ShopCar" EntityType="Self.View_ShopCar" />
+          <AssociationSet Name="FK_Goods_GoodsK" Association="Self.FK_Goods_GoodsK">
+            <End Role="GoodsK" EntitySet="GoodsK" />
+            <End Role="Goods" EntitySet="Goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdersDetails_Goods" Association="Self.FK_OrdersDetails_Goods">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopCar_Goods" Association="Self.FK_ShopCar_Goods">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="ShopCar" EntitySet="ShopCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsK_GoodsK" Association="Self.FK_GoodsK_GoodsK">
+            <End Role="GoodsK" EntitySet="GoodsK" />
+            <End Role="GoodsK1" EntitySet="GoodsK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_UserInfo" Association="Self.FK_Orders_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopCar_UserInfo" Association="Self.FK_ShopCar_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ShopCar" EntitySet="ShopCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAddress_UserInfo" Association="Self.FK_UserAddress_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="UserAddress" EntitySet="UserAddress" />
+          </AssociationSet>
+          <FunctionImport Name="ShopCar_Orders">
+            <Parameter Name="Users_id" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="UserPhone" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="note" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shiwoxinyigaiModelStoreContainer" CdmEntityContainer="shiwoxinyigaiEntities">
+          <EntitySetMapping Name="Goods">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.Goods">
+              <MappingFragment StoreEntitySet="Goods">
+                <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+                <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+                <ScalarProperty Name="GoodsImage" ColumnName="GoodsImage" />
+                <ScalarProperty Name="GoodsJianjie" ColumnName="GoodsJianjie" />
+                <ScalarProperty Name="GoodsDetails" ColumnName="GoodsDetails" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="GoodsK_id" ColumnName="GoodsK_id" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodsK">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.GoodsK">
+              <MappingFragment StoreEntitySet="GoodsK">
+                <ScalarProperty Name="GoodsK_id" ColumnName="GoodsK_id" />
+                <ScalarProperty Name="GoodsKName" ColumnName="GoodsKName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manager">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.Manager">
+              <MappingFragment StoreEntitySet="Manager">
+                <ScalarProperty Name="Manager_id" ColumnName="Manager_id" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+                <ScalarProperty Name="ManagerPass" ColumnName="ManagerPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Orders_id" ColumnName="Orders_id" />
+                <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersDetails">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.OrdersDetails">
+              <MappingFragment StoreEntitySet="OrdersDetails">
+                <ScalarProperty Name="Orders_id" ColumnName="Orders_id" />
+                <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopCar">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.ShopCar">
+              <MappingFragment StoreEntitySet="ShopCar">
+                <ScalarProperty Name="ShopCar_id" ColumnName="ShopCar_id" />
+                <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAddress">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.UserAddress">
+              <MappingFragment StoreEntitySet="UserAddress">
+                <ScalarProperty Name="UserAddress_id" ColumnName="UserAddress_id" />
+                <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserMail" ColumnName="UserMail" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="SafeQues" ColumnName="SafeQues" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserSign" ColumnName="UserSign" />
+                <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+                <ScalarProperty Name="Pifu" ColumnName="Pifu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_OrderDetails">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.View_OrderDetails">
+              <MappingFragment StoreEntitySet="View_OrderDetails">
+                <ScalarProperty Name="Orders_id" ColumnName="Orders_id" />
+                <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+                <ScalarProperty Name="GoodsImage" ColumnName="GoodsImage" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ShopCar">
+            <EntityTypeMapping TypeName="shiwoxinyigaiModel.View_ShopCar">
+              <MappingFragment StoreEntitySet="View_ShopCar">
+                <ScalarProperty Name="Goods_id" ColumnName="Goods_id" />
+                <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+                <ScalarProperty Name="GoodsImage" ColumnName="GoodsImage" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ShopCar_id" ColumnName="ShopCar_id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="Users_id" ColumnName="Users_id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ShopCar_Orders" FunctionName="shiwoxinyigaiModel.Store.ShopCar_Orders" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
